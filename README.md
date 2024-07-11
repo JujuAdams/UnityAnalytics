@@ -1,6 +1,6 @@
 <h1 align="center">UnityAnalytics 2.0.1</h1>
 
-<p align="center">Unity Analytics implementation for GameMaker</p>
+<p align="center">Unity Analytics but for GameMaker</p>
 
 <p align="center"><a href="https://github.com/JujuAdams/UnityAnalytics/releases/">Download the .yymps</a></p>
 
