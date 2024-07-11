@@ -1,6 +1,3 @@
-# UnityAnalytics
-Unity Analytics implementation for GameMaker
-
 <h1 align="center">UnityAnalytics 2.0.0</h1>
 
 <p align="center">Unity Analytics implementation for GameMaker</p>
