@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__Config",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__Config",
+  "parent":{
+    "name":"UnityAnalytics",
+    "path":"UnityAnalytics.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
