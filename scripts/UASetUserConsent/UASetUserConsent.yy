@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"UAGenerateUserID",
+  "%Name":"UASetUserConsent",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"UAGenerateUserID",
+  "name":"UASetUserConsent",
   "parent":{
     "name":"Unity Analytics",
     "path":"folders/Unity Analytics.yy",

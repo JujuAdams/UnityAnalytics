@@ -9,7 +9,7 @@ function __UAGameEndEvent()
         
         __UAConfigCallbackGameEnded();
         __UAEventUserEnded("GameEndEvent", __UA_SESSION_END_STATE_STOPPED);
-        __UASendPendingEvents();
+        __UASendPendingEvents(true);
         
         //Remove the heartbeat file since we've detected the end of the game
         file_delete(__UA_PATH_HEARTBEAT_DAT);

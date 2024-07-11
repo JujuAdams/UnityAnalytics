@@ -1,5 +1,13 @@
 // Feather disable all
 
+/// Tries to find a user ID in a specific file in storage. If a user ID cannot be found, a new user
+/// ID is generated and saved to storage. This means that the user ID is consistent between play
+/// sessions allowing you to track the user journey. Once you have obtained a user ID with this
+/// function, you should call UASetUserID() to initialize the library for that user.
+/// 
+/// If you have a separate unique user ID available to you, for example a Steam ID, then you don't
+/// need to use this function and you can instead pass the existing user ID into UASetUserID().
+/// 
 /// @param savePath
 
 function UAEnsureUserID(_path)
@@ -26,7 +34,7 @@ function UAEnsureUserID(_path)
     if (_userID == undefined)
     {
         if (UA_DEBUG_LEVEL >= 1) __UATrace("No user ID found at \"", _path, "\", creating a new user ID");
-        var _userID = UAGenerateUserID();
+        var _userID = __UAGenerateUUID(false);
         
         var _buffer = buffer_create(string_byte_length(_userID), buffer_fixed, 1);
         buffer_write(_buffer, buffer_text, _userID);

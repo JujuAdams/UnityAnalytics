@@ -1,12 +1,20 @@
 // Feather disable all
 
+/// Sets the current user's ID. You should call this function whenever a new user starts playing
+/// your game, even if the game application itself has not been resetarted. This includes things
+/// like account changes on consoles etc.
+/// 
+/// N.B. After calling UASetUserID(), you must call UASetUserConsent(). No analytics will be sent
+///      until UASetUserConsent() is called.
+/// 
+/// The locale argument can be used to specify the user's system locale. If not specified, the
+/// value returned by GameMaker's native os_get_language() is used instead.
+/// 
 /// @param userID
 /// @param [locale]
 
 function UASetUserID(_userID, _locale = os_get_language())
 {
-    if (not UA_ENABLED) return;
-    
     static _system = __UASystem();
     
     with(_system)
@@ -21,11 +29,14 @@ function UASetUserID(_userID, _locale = os_get_language())
                 
                 //Previous user stopped playing
                 __UAEventUserEnded("UASetUser", __UA_SESSION_END_STATE_STOPPED);
+                __UASendPendingEvents(false);
             }
             
-            __userUUID      = undefined;
-            __userStartTime = undefined;
-            __userLocale    = "xx";
+            __userUUID       = undefined;
+            __userStartTime  = undefined;
+            __userLocale     = "xx";
+            __userConsent    = false;
+            __userConsentSet = false;
             
             return;
         }
@@ -36,7 +47,7 @@ function UASetUserID(_userID, _locale = os_get_language())
         }
         else
         {
-            var _userUUID = sha1_string_utf8(sha1_string_utf8(string(_userID)) + UA_USER_ID_SALT);
+            var _userUUID = sha1_string_utf8(sha1_string_utf8(string(_userID)) + string(UA_USER_ID_SALT));
         }
         
         if (__userUUID != _userUUID)
@@ -47,6 +58,7 @@ function UASetUserID(_userID, _locale = os_get_language())
                 
                 //Previous user stopped playing
                 __UAEventUserEnded("UASetUser", __UA_SESSION_END_STATE_STOPPED);
+                __UASendPendingEvents(false);
             }
             else
             {
@@ -55,10 +67,12 @@ function UASetUserID(_userID, _locale = os_get_language())
             
             __lastHeartbeatTime = -infinity;
             
-            __userUUID      = _userUUID;
-            __userStartTime = date_current_datetime();
-            __userLocale    = _locale;
-            __sessionID     = __UAGenerateUUID();
+            __userUUID       = _userUUID;
+            __userStartTime  = date_current_datetime();
+            __userLocale     = _locale;
+            __userConsent    = false;
+            __userConsentSet = false;
+            __sessionID      = __UAGenerateUUID();
             
             //User started playing
             __UAEventUserStarted("UASetUser");

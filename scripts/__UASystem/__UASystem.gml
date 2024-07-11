@@ -13,11 +13,12 @@
 #macro __UA_SESSION_END_STATE_STOPPED  "stopped"
 #macro __UA_SESSION_END_STATE_CRASHED  "crashed"
 
-#macro __UA_ON_CONSOLE  ((os_type == os_switch) || (os_type == os_ps5) || (os_type == os_ps4) || (os_type == os_xboxone) || (os_type == os_xboxseriesxs))
+#macro __UA_USE_HEARTBEAT  ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux) || (os_type == os_android) || (os_type == os_ios) || (os_type == os_tvos))
 
 #macro __UA_PATH_HEARTBEAT_DAT  "UAHeartbeat.dat"
 #macro __UA_PATH_PENDING_DAT    "UAPending.dat"
 
+__UASystem();
 function __UASystem()
 {
     static _system = undefined;
@@ -26,6 +27,9 @@ function __UASystem()
     _system = {};
     with(_system)
     {
+        __userConsent    = false;
+        __userConsentSet = false;
+        
         __osPaused          = os_is_paused();
         __lastFocusTime     = current_time;
         __lastHeartbeatTime = -infinity;
@@ -40,146 +44,147 @@ function __UASystem()
         
         __sentEventMap = ds_map_create();
         
-        if (UA_ENABLED)
+        __UATrace("Welcome to Unity Analytics by Juju Adams! This is version ", __UA_VERSION, " ", __UA_DATE);
+        
+        if (UA_PROJECT_ID == "")
         {
-            __UATrace("Welcome to Unity Analytics by Juju Adams! This is version ", __UA_VERSION, " ", __UA_DATE);
+            __UAError("The project ID has not been set.\nPlease see the __UAConfig script.");
+        }
+        
+        if (file_exists(__UA_PATH_PENDING_DAT))
+        {
+            if (UA_DEBUG_LEVEL >= 2) __UATrace("Found pending event data");
             
-            if (file_exists(__UA_PATH_PENDING_DAT))
+            try
             {
-                if (UA_DEBUG_LEVEL >= 2) __UATrace("Found pending event data");
+                var _buffer = buffer_load(__UA_PATH_PENDING_DAT);
+                var _pendingArray = buffer_read(_buffer, buffer_string);
+                buffer_delete(_buffer);
                 
-                try
-                {
-                    var _buffer = buffer_load(__UA_PATH_PENDING_DAT);
-                    var _pendingArray = buffer_read(_buffer, buffer_string);
-                    buffer_delete(_buffer);
-                    
-                    var _pendingArray = json_parse(_pendingArray);
-                    
-                    var _i = 0;
-                    repeat(array_length(_pendingArray))
-                    {
-                        __UAPayloadSend(_pendingArray[_i]);
-                        ++_i;
-                    }
-                }
-                catch(_error)
-                {
-                    show_debug_message(_error);
-                    __UATrace("Warning! Failed to load old pending data");
-                }
+                var _pendingArray = json_parse(_pendingArray);
                 
-                file_delete(__UA_PATH_PENDING_DAT);
+                var _i = 0;
+                repeat(array_length(_pendingArray))
+                {
+                    __UAPayloadSend(_pendingArray[_i]);
+                    ++_i;
+                }
+            }
+            catch(_error)
+            {
+                show_debug_message(_error);
+                __UATrace("Warning! Failed to load old pending data");
             }
             
-            if (file_exists(__UA_PATH_HEARTBEAT_DAT))
+            file_delete(__UA_PATH_PENDING_DAT);
+        }
+        
+        if (__UA_USE_HEARTBEAT && file_exists(__UA_PATH_HEARTBEAT_DAT))
+        {
+            if (UA_DEBUG_LEVEL >= 2) __UATrace("Found heartbeat data");
+            
+            try
             {
-                if (UA_DEBUG_LEVEL >= 2) __UATrace("Found heartbeat data");
+                var _buffer    = buffer_load(__UA_PATH_HEARTBEAT_DAT);
+                var _sessionID = buffer_read(_buffer, buffer_string);
+                var _userUUID  = buffer_read(_buffer, buffer_string);
+                var _timeCode  = buffer_read(_buffer, buffer_f64);
+                buffer_delete(_buffer);
                 
-                try
-                {
-                    var _buffer    = buffer_load(__UA_PATH_HEARTBEAT_DAT);
-                    var _sessionID = buffer_read(_buffer, buffer_string);
-                    var _userUUID  = buffer_read(_buffer, buffer_string);
-                    var _timeCode  = buffer_read(_buffer, buffer_f64);
-                    buffer_delete(_buffer);
-                    
-                    var _payload = __UAConfigEventUserEnded();
-                    _payload.sdkMethod       = "OnBoot";
-                    _payload.sessionEndState = __UA_SESSION_END_STATE_CRASHED;
-                    
-                    var _event = new __UAClassEvent(_userUUID, int64(__UA_EVENT_NAME_USER_ENDED_VERSION), _payload);
-                    //Override some properties
-                    _event.sessionID      = _sessionID;
-                    _event.eventTimestamp = __UAGenerateTimestamp(_timeCode);
-                    
-                    //Send immediately
-                    __UAPayloadSend(_event);
-                }
-                catch(_error)
-                {
-                    show_debug_message(_error);
-                    __UATrace("Warning! Failed to load old heartbeat data");
-                }
+                var _payload = __UAConfigEventUserEnded();
+                _payload.sdkMethod       = "OnBoot";
+                _payload.sessionEndState = __UA_SESSION_END_STATE_CRASHED;
                 
-                file_delete(__UA_PATH_HEARTBEAT_DAT);
+                var _event = new __UAClassEvent(_userUUID, int64(__UA_EVENT_NAME_USER_ENDED_VERSION), _payload);
+                //Override some properties
+                _event.sessionID      = _sessionID;
+                _event.eventTimestamp = __UAGenerateTimestamp(_timeCode);
+                    
+                //Send immediately
+                __UAPayloadSend(_event);
             }
+            catch(_error)
+            {
+                show_debug_message(_error);
+                __UATrace("Warning! Failed to load old heartbeat data");
+            }
+            
+            file_delete(__UA_PATH_HEARTBEAT_DAT);
         }
     }
     
-    if (UA_ENABLED)
+    time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()
     {
-        time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()
+        static _system = __UASystem();
+        static _controllerInstance = undefined;
+        static _heartbeatBuffer = buffer_create(1024, buffer_fixed, 1);
+        
+        with(_system)
         {
-            static _system = __UASystem();
-            static _controllerInstance = undefined;
-            static _heartbeatBuffer = buffer_create(1024, buffer_fixed, 1);
-            
-            with(_system)
+            if (os_is_paused() != __osPaused)
             {
-                if (os_is_paused() != __osPaused)
-                {
-                    __osPaused = os_is_paused();
-                    
-                    if (__osPaused)
-                    {
-                        //Focus restored, compare against last focus time
-                        if ((__userUUID != undefined) && (current_time - __lastFocusTime > 60*1000*UA_FOCUS_DETACH))
-                        {
-                            __UAEventUserEnded("GameLostFocus", __UA_SESSION_END_STATE_PAUSED);
-                            
-                            __lastHeartbeatTime = -infinity;
-                            
-                            __userStartTime = date_current_datetime();
-                            __sessionID     = __UAGenerateUUID();
-                            __UAEventUserStarted("GameRegainedFocus");
-                        }
-                    }
-                }
+                __osPaused = os_is_paused();
                 
-                if (not __osPaused)
+                if (__osPaused)
                 {
-                    __lastFocusTime = current_time;
-                    
-                    if ((not __UA_ON_CONSOLE) && (current_time - __lastHeartbeatTime > 60*1000*UA_HEARTBEAT_DELAY) && (__userUUID != undefined))
+                    //Focus restored, compare against last focus time
+                    if ((__userUUID != undefined) && (current_time - __lastFocusTime > 60*1000*UA_FOCUS_DETACH))
                     {
-                        __lastHeartbeatTime = current_time;
+                        __UAEventUserEnded("GameLostFocus", __UA_SESSION_END_STATE_PAUSED);
                         
-                        var _timeCode = date_current_datetime();
+                        __lastHeartbeatTime = -infinity;
                         
-                        buffer_seek(_heartbeatBuffer, buffer_seek_start, 0);
-                        buffer_write(_heartbeatBuffer, buffer_string, __sessionID);
-                        buffer_write(_heartbeatBuffer, buffer_string, __userUUID);
-                        buffer_write(_heartbeatBuffer, buffer_f64, _timeCode);
-                        buffer_save_ext(_heartbeatBuffer, __UA_PATH_HEARTBEAT_DAT, 0, buffer_tell(_heartbeatBuffer));
-                        
-                        if (UA_DEBUG_LEVEL >= 2) __UATrace("Saving heartbeat data");
+                        __userStartTime = date_current_datetime();
+                        __sessionID     = __UAGenerateUUID();
+                        __UAEventUserStarted("GameRegainedFocus");
                     }
                 }
-                
-                if ((_controllerInstance != undefined) && (not instance_exists(_controllerInstance)))
-                {
-                    if (GM_build_type == "run")
-                    {
-                        __UAError("UnityAnalyticsController must not be destroyed or deactivated");
-                    }
-                    else
-                    {
-                        _controllerInstance = undefined;
-                        __UATrace("Warning! UnityAnalyticsController was destroyed or deactivated");
-                    }
-                }
-                
-                if (_controllerInstance == undefined)
-                {
-                    _controllerInstance = instance_create_depth(0, 0, 0, UnityAnalyticsController);
-                }
-                
-                __UASendPendingEvents();
             }
             
-        }, [], -1));
-    }
+            if (not __osPaused)
+            {
+                __lastFocusTime = current_time;
+                    
+                if (__UA_USE_HEARTBEAT
+                &&  (current_time - __lastHeartbeatTime > 60*1000*UA_HEARTBEAT_DELAY)
+                &&  (__userUUID != undefined))
+                {
+                    __lastHeartbeatTime = current_time;
+                    
+                    var _timeCode = date_current_datetime();
+                    
+                    buffer_seek(_heartbeatBuffer, buffer_seek_start, 0);
+                    buffer_write(_heartbeatBuffer, buffer_string, __sessionID);
+                    buffer_write(_heartbeatBuffer, buffer_string, __userUUID);
+                    buffer_write(_heartbeatBuffer, buffer_f64, _timeCode);
+                    buffer_save_ext(_heartbeatBuffer, __UA_PATH_HEARTBEAT_DAT, 0, buffer_tell(_heartbeatBuffer));
+                     
+                    if (UA_DEBUG_LEVEL >= 2) __UATrace("Saving heartbeat data");
+                }
+            }
+            
+            if ((_controllerInstance != undefined) && (not instance_exists(_controllerInstance)))
+            {
+                if (GM_build_type == "run")
+                {
+                    __UAError("UnityAnalyticsController must not be destroyed or deactivated");
+                }
+                else
+                {
+                    _controllerInstance = undefined;
+                    __UATrace("Warning! UnityAnalyticsController was destroyed or deactivated");
+                }
+            }
+            
+            if (_controllerInstance == undefined)
+            {
+                _controllerInstance = instance_create_depth(0, 0, 0, UnityAnalyticsController);
+            }
+            
+            __UASendPendingEvents(false);
+        }
+        
+    }, [], -1));
     
     return _system;
 }
