@@ -11,5 +11,5 @@ function __UAError()
         ++_i;
     }
     
-    show_error(_string, true);
+    show_error(_string + "\n ", true);
 }
