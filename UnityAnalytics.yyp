@@ -25,7 +25,9 @@
   "resources":[
     {"id":{"name":"fntDefault","path":"fonts/fntDefault/fntDefault.yy",},},
     {"id":{"name":"Unity Analytics Quick Start","path":"notes/Unity Analytics Quick Start/Unity Analytics Quick Start.yy",},},
-    {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},},
+    {"id":{"name":"oPageConsent","path":"objects/oPageConsent/oPageConsent.yy",},},
+    {"id":{"name":"oPageLanding","path":"objects/oPageLanding/oPageLanding.yy",},},
+    {"id":{"name":"oPageTest","path":"objects/oPageTest/oPageTest.yy",},},
     {"id":{"name":"UnityAnalyticsController","path":"objects/UnityAnalyticsController/UnityAnalyticsController.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
     {"id":{"name":"__Config","path":"scripts/__Config/__Config.yy",},},
