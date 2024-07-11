@@ -1,4 +1,5 @@
 // Feather disable all
 
 draw_set_font(fntDefault);
-UASetUser("Juju");
+UASetUserID(UAEnsureUserID("ua.dat"));
+UASetUserConsent(true);

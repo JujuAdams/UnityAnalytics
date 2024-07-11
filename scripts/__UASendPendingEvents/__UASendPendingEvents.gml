@@ -11,6 +11,7 @@ function __UASendPendingEvents(_forceAll)
     
     static _lastSend = -infinity;
     
+    //We don't know whether the user consented or not, don't send anything
     if (not _system.__userConsentSet) return;
     
     var _length = array_length(_pendingEventArray);

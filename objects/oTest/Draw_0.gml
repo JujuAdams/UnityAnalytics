@@ -1,5 +1,5 @@
 UIStart(10, 10);
-UIText("Unity Analytics Tester");
+UIText("Unity Analytics " + __UA_VERSION);
 UINewline();
 UIButton("Send test event", function()
 {
