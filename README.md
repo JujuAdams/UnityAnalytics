@@ -1,4 +1,4 @@
-<h1 align="center">UnityAnalytics 2.0.0</h1>
+<h1 align="center">UnityAnalytics 2.0.1</h1>
 
 <p align="center">Unity Analytics implementation for GameMaker</p>
 

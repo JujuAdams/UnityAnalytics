@@ -1,4 +1,4 @@
-#macro __UA_VERSION  "2.0.0"
+#macro __UA_VERSION  "2.0.1"
 #macro __UA_DATE     "2024-07-11"
 
 #macro __UA_COLLECT_ENDPOINT  ("https://collect.analytics.unity3d.com/api/analytics/collect/v1/projects/" + UA_PROJECT_ID + "/environments/" + UA_ENVIRONMENT_ID)
