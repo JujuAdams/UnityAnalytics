@@ -2,7 +2,7 @@
 
 function __UAError()
 {
-    var _string = "UA:\n";
+    var _string = " \nUA:\n";
     
     var _i = 0;
     repeat(argument_count)
