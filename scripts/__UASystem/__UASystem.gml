@@ -13,7 +13,7 @@
 #macro __UA_SESSION_END_STATE_STOPPED  "stopped"
 #macro __UA_SESSION_END_STATE_CRASHED  "crashed"
 
-#macro __UA_USE_HEARTBEAT  ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux) || (os_type == os_android) || (os_type == os_ios) || (os_type == os_tvos))
+#macro __UA_FILE_SYSTEM_ACCESS  ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux) || (os_type == os_android) || (os_type == os_ios) || (os_type == os_tvos))
 
 #macro __UA_PATH_HEARTBEAT_DAT  "UAHeartbeat.dat"
 #macro __UA_PATH_PENDING_DAT    "UAPending.dat"
@@ -79,7 +79,7 @@ function __UASystem()
             file_delete(__UA_PATH_PENDING_DAT);
         }
         
-        if (__UA_USE_HEARTBEAT && file_exists(__UA_PATH_HEARTBEAT_DAT))
+        if (__UA_FILE_SYSTEM_ACCESS && file_exists(__UA_PATH_HEARTBEAT_DAT))
         {
             if (UA_DEBUG_LEVEL >= 2) __UATrace("Found heartbeat data");
             
@@ -145,7 +145,7 @@ function __UASystem()
             {
                 __lastFocusTime = current_time;
                     
-                if (__UA_USE_HEARTBEAT
+                if (__UA_FILE_SYSTEM_ACCESS
                 &&  (current_time - __lastHeartbeatTime > 60*1000*UA_HEARTBEAT_DELAY)
                 &&  (__userUUID != undefined))
                 {

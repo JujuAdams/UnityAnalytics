@@ -52,6 +52,7 @@
     {"id":{"name":"UAEnsureUserID","path":"scripts/UAEnsureUserID/UAEnsureUserID.yy",},},
     {"id":{"name":"UAEvent","path":"scripts/UAEvent/UAEvent.yy",},},
     {"id":{"name":"UAEventAppCrashed","path":"scripts/UAEventAppCrashed/UAEventAppCrashed.yy",},},
+    {"id":{"name":"UAGenerateUserID","path":"scripts/UAGenerateUserID/UAGenerateUserID.yy",},},
     {"id":{"name":"UAGetUserConsent","path":"scripts/UAGetUserConsent/UAGetUserConsent.yy",},},
     {"id":{"name":"UAGetUserID","path":"scripts/UAGetUserID/UAGetUserID.yy",},},
     {"id":{"name":"UASetUserConsent","path":"scripts/UASetUserConsent/UASetUserConsent.yy",},},

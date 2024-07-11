@@ -12,6 +12,11 @@
 
 function UAEnsureUserID(_path)
 {
+    if (not __UA_FILE_SYSTEM_ACCESS)
+    {
+        __UAError("Cannot use UAEnsureUserID() on this platform\nPlease manually generate a user ID (or use a platform user ID)");
+    }
+    
     var _userID = undefined;
     
     if (file_exists(_path))
@@ -34,7 +39,7 @@ function UAEnsureUserID(_path)
     if (_userID == undefined)
     {
         if (UA_DEBUG_LEVEL >= 1) __UATrace("No user ID found at \"", _path, "\", creating a new user ID");
-        var _userID = __UAGenerateUUID(false);
+        var _userID = UAGenerateUserID();
         
         var _buffer = buffer_create(string_byte_length(_userID), buffer_fixed, 1);
         buffer_write(_buffer, buffer_text, _userID);
