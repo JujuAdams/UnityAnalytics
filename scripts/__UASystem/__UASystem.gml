@@ -95,7 +95,7 @@ function __UASystem()
                 _payload.sdkMethod       = "OnBoot";
                 _payload.sessionEndState = __UA_SESSION_END_STATE_CRASHED;
                 
-                var _event = new __UAClassEvent(_userUUID, int64(__UA_EVENT_NAME_USER_ENDED_VERSION), _payload);
+                var _event = new __UAClassEvent(_userUUID, __UA_EVENT_NAME_USER_ENDED_VERSION, _payload);
                 //Override some properties
                 _event.sessionID      = _sessionID;
                 _event.eventTimestamp = __UAGenerateTimestamp(_timeCode);

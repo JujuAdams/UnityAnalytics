@@ -36,7 +36,7 @@ function __UAClassEvent(_userID, _eventVersion = undefined, _eventName, _eventPa
     eventParams    = _eventParams;
     
     _eventParams.platform = __UAGetPlatformName();
-    if (_eventVersion != undefined) eventVersion = _eventVersion;
+    if (_eventVersion != undefined) eventVersion = int64(_eventVersion);
     
     //DO NOT ADD STATICS OR METHODS TO THIS CLASS
 }
