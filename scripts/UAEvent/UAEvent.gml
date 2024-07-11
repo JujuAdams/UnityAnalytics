@@ -4,7 +4,8 @@
 /// default UA event or a custom UA event, as set up in the Unity Analytics backend.
 /// 
 /// If an event is marked as "high priority" then, if possible, that event will be sent immediately
-/// and not queued for sending later.
+/// and not queued for sending later. You almost certainly won't need to use this feature but it's
+/// there if you need it.
 /// 
 /// When triggering events that correspond to default Unity Analytics events, you may find that you
 /// need to specify an event version. This can be done with the corresponding optional argument for
