@@ -24,4 +24,4 @@
  9. Wait 5 minutes then check the event browser to confirm your custom events have been received.
 10. Remove the `UASetUserConsent()` call on boot and build a user consent flow for analytics in your game.
 
-And you're done! Please read comments in the library's functions (there aren't many) to learn about advanced use. This library **should** work on every platform that allows outgoing HTTP requests but this is has only been tested on desktop and mobile.
+And you're done! Please read comments in the library's functions (there aren't many) to learn about advanced use. This library **should** work on every platform that allows outgoing HTTP requests but has only been tested on desktop and mobile.
