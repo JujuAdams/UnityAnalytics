@@ -7,7 +7,6 @@ function __UASendPendingEvents(_forceAll)
     static _system            = __UASystem();
     static _sentEventMap      = _system.__sentEventMap;
     static _pendingEventArray = _system.__pendingEventArray;
-    static _tempArray         = [];
     
     static _lastSend = -infinity;
     
@@ -27,16 +26,19 @@ function __UASendPendingEvents(_forceAll)
             var _count = min(_length, UA_MAX_EVENTS_PER_REQUEST);
             
             //Copy a small block of data from the pending event array
+            //We have to make a new array here so that the pending requests system works
+            var _tempArray = array_create(_count);
             array_copy(_tempArray, 0, _pendingEventArray, 0, _count);
             array_delete(_pendingEventArray, 0, _count);
             
             //Send off what we have
             __UAPayloadSend({ eventList: _tempArray });
-            
-            //Size down the temporary array for the next request
-            array_resize(_tempArray, 0);
         }
         
-        if (_forceAll) __UASendPendingEvents(true);
+        if (_forceAll)
+        {
+            //Recursively call this function until all events have been sent
+            __UASendPendingEvents(true);
+        }
     }
 }
