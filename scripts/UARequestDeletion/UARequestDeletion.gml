@@ -24,7 +24,6 @@ function UARequestDeletion()
     var _payload = {};
     _payload.clientVersion = string(UA_GAME_CLIENT_VERSION);
     _payload.sdkMethod     = "UARequestDeletion";
-    _payload.userLocale    = _system.__userLocale;
     
     var _event = new __UAClassEvent(_system.__userUUID, UA_EVENT_NAME_DELETION_REQUESTED_VERSION, UA_EVENT_NAME_DELETION_REQUESTED, _payload);
     __UAPayloadSend(_event);
