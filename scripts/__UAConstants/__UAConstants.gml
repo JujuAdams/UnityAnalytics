@@ -4,7 +4,7 @@
 ///    https://services.docs.unity.com/analytics/v1/index.html
 ///    https://docs.unity.com/ugs/en-us/manual/analytics/manual/overview
 
-#macro UA_VERSION  "2.1.0"
+#macro UA_VERSION  "2.1.1"
 #macro UA_DATE     "2025-09-24"
 
 #macro UA_RUNNING_EVENT_DELAY  (60*1000) //ms
