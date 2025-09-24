@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Unity Analytics REST API documentation can be found at https://services.docs.unity.com/analytics/v1/index.html
+
 #macro UA_VERSION  "2.0.1"
 #macro UA_DATE     "2024-07-11"
 

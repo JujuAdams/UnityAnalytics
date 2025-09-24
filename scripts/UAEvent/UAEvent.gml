@@ -17,6 +17,8 @@
 /// need to specify an event version. This can be done with the corresponding optional argument for
 /// this function.
 /// 
+/// Unity Analytics REST API documentation can be found at https://services.docs.unity.com/analytics/v1/index.html
+/// 
 /// @param eventName
 /// @param eventParamsStruct
 /// @param [highPriority=false]

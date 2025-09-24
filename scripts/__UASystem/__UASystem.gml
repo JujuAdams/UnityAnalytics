@@ -1,3 +1,5 @@
+// Unity Analytics REST API documentation can be found at https://services.docs.unity.com/analytics/v1/index.html
+
 __UASystem();
 function __UASystem()
 {

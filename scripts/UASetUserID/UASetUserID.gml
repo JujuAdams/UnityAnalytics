@@ -10,6 +10,8 @@
 /// The locale argument can be used to specify the user's system locale. If not specified, the
 /// value returned by GameMaker's native `os_get_language()` is used instead.
 /// 
+/// Unity Analytics REST API documentation can be found at https://services.docs.unity.com/analytics/v1/index.html
+/// 
 /// @param userID
 /// @param [locale]
 

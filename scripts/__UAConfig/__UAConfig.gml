@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Unity Analytics REST API documentation can be found at https://services.docs.unity.com/analytics/v1/index.html
+
 /// Identifiers for your project and project environment. You can retrieve these values from the
 /// Unity Analytics backend. You must fill out these values before this library will work.
 #macro UA_PROJECT_ID      ""

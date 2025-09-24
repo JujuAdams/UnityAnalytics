@@ -15,3 +15,5 @@
 10. Remove the UASetUserConsent() call on boot and build a user consent flow for analytics in your game.
 
 And you're done!
+
+Please consult the Unity Analytics REST API documentation for more information: https://services.docs.unity.com/analytics/v1/index.html
