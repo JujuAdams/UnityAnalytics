@@ -5,6 +5,8 @@
 #macro UA_VERSION  "2.0.1"
 #macro UA_DATE     "2024-07-11"
 
+#macro UA_RUNNING_EVENT_DELAY  (60*1000) //ms
+
 #macro UA_COLLECT_ENDPOINT  ("https://collect.analytics.unity3d.com/api/analytics/collect/v1/projects/" + UA_PROJECT_ID + "/environments/" + UA_ENVIRONMENT_ID)
 
 #macro UA_RUNNING_FROM_IDE  (GM_build_type == "run")
@@ -34,5 +36,4 @@
 
 #macro UA_FILE_SYSTEM_ACCESS  ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux) || (os_type == os_android) || (os_type == os_ios) || (os_type == os_tvos))
 
-#macro UA_PATH_HEARTBEAT_DAT  "uaheartbeat.dat"
-#macro UA_PATH_PENDING_DAT    "uapending.dat"
+#macro UA_PATH_PENDING_DAT  "uapending.dat"

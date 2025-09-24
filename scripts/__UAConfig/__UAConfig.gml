@@ -23,12 +23,6 @@
 /// if you want to turn off this feature.
 #macro UA_FOCUS_DETACH  20
 
-/// How often (in minutes) to save a small file to record when the game was last active. This can
-/// be used to detect unexpected terminations of the game. This feature is only enabled on Windows,
-/// MacOS, Linux, Android, iOS, and tvOS. If you don't want to use this feature, set the macro to
-/// `infinity`.
-#macro UA_HEARTBEAT_DELAY  5
-
 /// Internal string used to protect user privacy. If you would like to use literal user IDs for your
 /// analytics, set this macro to `undefined`. You should only ever do this for testing purposes.
 #macro UA_USER_ID_SALT  UA_PROJECT_ID

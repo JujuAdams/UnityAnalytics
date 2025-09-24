@@ -11,9 +11,6 @@ function __UAGameEndEvent()
         __UAEventUserEnded(UA_METHOD_NAME_GAME_END_EVENT, UA_SESSION_END_STATE_STOPPED);
         __UASendPendingEvents(true);
         
-        //Remove the heartbeat file since we've detected the end of the game
-        file_delete(UA_PATH_HEARTBEAT_DAT);
-        
         //Save all pending payloads
         var _pendingPayloadArray = ds_map_values_to_array(__sentEventMap);
         
