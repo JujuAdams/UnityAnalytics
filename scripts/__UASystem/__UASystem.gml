@@ -9,6 +9,11 @@ function __UASystem()
     _system = {};
     with(_system)
     {
+        if (debug_mode)
+        {
+            global.__UnityAnalytics = self;
+        }
+        
         __userConsent    = false;
         __userConsentSet = false;
         
