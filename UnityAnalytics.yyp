@@ -56,6 +56,7 @@
     {"id":{"name":"UAGenerateUserID","path":"scripts/UAGenerateUserID/UAGenerateUserID.yy",},},
     {"id":{"name":"UAGetUserConsent","path":"scripts/UAGetUserConsent/UAGetUserConsent.yy",},},
     {"id":{"name":"UAGetUserID","path":"scripts/UAGetUserID/UAGetUserID.yy",},},
+    {"id":{"name":"UARequestDeletion","path":"scripts/UARequestDeletion/UARequestDeletion.yy",},},
     {"id":{"name":"UASetUserConsent","path":"scripts/UASetUserConsent/UASetUserConsent.yy",},},
     {"id":{"name":"UASetUserID","path":"scripts/UASetUserID/UASetUserID.yy",},},
     {"id":{"name":"UIButton","path":"scripts/UIButton/UIButton.yy",},},

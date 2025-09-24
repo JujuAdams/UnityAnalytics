@@ -10,10 +10,12 @@
 #macro UA_RUNNING_FROM_IDE  (GM_build_type == "run")
 
 /// Magic values to interface with Unity Analytics' standard events.
-#macro UA_EVENT_NAME_USER_STARTED          "gameStarted"
-#macro UA_EVENT_NAME_USER_STARTED_VERSION  1
-#macro UA_EVENT_NAME_USER_ENDED            "gameEnded"
-#macro UA_EVENT_NAME_USER_ENDED_VERSION    1
+#macro UA_EVENT_NAME_USER_STARTED                "gameStarted"
+#macro UA_EVENT_NAME_USER_STARTED_VERSION        1
+#macro UA_EVENT_NAME_USER_ENDED                  "gameEnded"
+#macro UA_EVENT_NAME_USER_ENDED_VERSION          1
+#macro UA_EVENT_NAME_DELETION_REQUESTED          "ddnaForgetMe"
+#macro UA_EVENT_NAME_DELETION_REQUESTED_VERSION  1
 
 /// I wrote this code a while ago so I have no idea where these magic strings have come from.
 /// Maybe if you send an invalid standard event the error message tells you?

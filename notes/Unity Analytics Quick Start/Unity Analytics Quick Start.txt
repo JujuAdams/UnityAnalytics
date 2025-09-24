@@ -61,6 +61,9 @@
 14. Remove the `UASetUserConsent(true)` call on boot and build a user consent flow for analytics in your game.
     Wise man say "respecting consent lead to great fortune, ignoring consent lead to Civil Court".
 
+15. Add a button to delete analytics data to a Settings menu etc.
+    This means calling `UARequestDeletion()`.
+
 And you're done!
 
 Please consult the Unity Analytics REST API documentation for more information: https://services.docs.unity.com/analytics/v1/index.html
