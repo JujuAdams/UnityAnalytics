@@ -1,7 +1,7 @@
 // Feather disable all
 
 UIStart(10, 10);
-UIText("Unity Analytics " + __UA_VERSION);
+UIText("Unity Analytics " + UA_VERSION);
 UINewline();
 UIButton("Set using ensured user ID", function()
 {

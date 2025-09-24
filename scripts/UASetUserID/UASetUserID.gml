@@ -28,7 +28,7 @@ function UASetUserID(_userID, _locale = os_get_language())
                 if (UA_DEBUG_LEVEL >= 2) __UATrace("Unsetting user UUID from \"", __userUUID, "\"");
                 
                 //Previous user stopped playing
-                __UAEventUserEnded("UASetUser", __UA_SESSION_END_STATE_STOPPED);
+                __UAEventUserEnded("UASetUser", UA_SESSION_END_STATE_STOPPED);
                 __UASendPendingEvents(false);
             }
             
@@ -57,7 +57,7 @@ function UASetUserID(_userID, _locale = os_get_language())
                 if (UA_DEBUG_LEVEL >= 2) __UATrace("Setting user UUID to \"", _userUUID, "\" from \"", __userUUID, "\" (", _userID, ")");
                 
                 //Previous user stopped playing
-                __UAEventUserEnded("UASetUser", __UA_SESSION_END_STATE_STOPPED);
+                __UAEventUserEnded("UASetUser", UA_SESSION_END_STATE_STOPPED);
                 __UASendPendingEvents(false);
             }
             else

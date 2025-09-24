@@ -14,7 +14,7 @@ function __UAPayloadSend(_payload)
     })();
     
     var _body = json_stringify(_payload);
-	var _requestID = http_request(__UA_COLLECT_ENDPOINT, "POST", _headerMap, _body);
+	var _requestID = http_request(UA_COLLECT_ENDPOINT, "POST", _headerMap, _body);
     
     if (UA_DEBUG_LEVEL >= 2) __UATrace("Request ID ", _requestID, " started          ", _body);
     _sentEventMap[? _requestID] = _payload;

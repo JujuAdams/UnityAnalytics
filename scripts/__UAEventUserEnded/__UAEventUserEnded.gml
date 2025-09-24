@@ -12,5 +12,5 @@ function __UAEventUserEnded(_sdkMethod, _endState, _highPriority = false)
     _payload.sdkMethod       = _sdkMethod;
     _payload.sessionEndState = _endState;
     
-    UAEvent(__UA_EVENT_NAME_USER_ENDED, _payload, _highPriority, __UA_EVENT_NAME_USER_ENDED_VERSION);
+    UAEvent(UA_EVENT_NAME_USER_ENDED, _payload, _highPriority, UA_EVENT_NAME_USER_ENDED_VERSION);
 }

@@ -24,7 +24,7 @@ function UASetUserConsent(_state)
         {
             if (_system.__userConsent)
             {
-                __UAEventUserEnded("UserWithdrewConsent", __UA_SESSION_END_STATE_STOPPED);
+                __UAEventUserEnded("UserWithdrewConsent", UA_SESSION_END_STATE_STOPPED);
             }
         }
         else

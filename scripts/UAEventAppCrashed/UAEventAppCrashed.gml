@@ -8,8 +8,8 @@
 
 function UAEventAppCrashed()
 {
-    __UAEventUserEnded("UAEventAppCrashed", __UA_SESSION_END_STATE_CRASHED, true);
+    __UAEventUserEnded("UAEventAppCrashed", UA_SESSION_END_STATE_CRASHED, true);
     
     //Don't duplicate a crash event with a heartbeat
-    file_delete(__UA_PATH_HEARTBEAT_DAT);
+    file_delete(UA_PATH_HEARTBEAT_DAT);
 }

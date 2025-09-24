@@ -12,7 +12,7 @@
 
 function UAEnsureUserID(_path)
 {
-    if (not __UA_FILE_SYSTEM_ACCESS)
+    if (not UA_FILE_SYSTEM_ACCESS)
     {
         __UAError("Cannot use UAEnsureUserID() on this platform\nPlease manually generate a user ID (or use a platform user ID)");
     }
