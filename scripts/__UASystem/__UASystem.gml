@@ -62,7 +62,7 @@ function __UASystem()
             catch(_error)
             {
                 show_debug_message(_error);
-                __UATrace("Warning! Failed to load old pending data");
+                __UATrace("Warning! Failed to load old pending data from \"", UA_PATH_PENDING_DAT, "\"");
             }
             
             file_delete(UA_PATH_PENDING_DAT);

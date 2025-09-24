@@ -16,7 +16,15 @@ function UARequestDeletion()
     
     if (_system.__userUUID == undefined)
     {
-        if (UA_DEBUG_LEVEL >= 1) __UATrace("Warning! Cannot request deletion, user ID is unset");
+        if (UA_RUNNING_FROM_IDE)
+        {
+            __UAError("Cannot request deletion, user ID is unset");
+        }
+        else
+        {
+            __UATrace("Warning! Cannot request deletion, user ID is unset");
+        }
+        
         return;
     }
     

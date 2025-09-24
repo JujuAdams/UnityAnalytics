@@ -15,7 +15,15 @@ function UASetUserConsent(_state)
     
     if (_system.__userUUID == undefined)
     {
-        __UATrace("Warning! Cannot set user consent state without a user set");
+        if (UA_RUNNING_FROM_IDE)
+        {
+            __UAError("Cannot set user consent state without a user set");
+        }
+        else
+        {
+            __UATrace("Warning! Cannot set user consent state without a user set");
+        }
+        
         return;
     }
     
