@@ -96,13 +96,13 @@ function __UASystem()
                     //Focus restored, compare against last focus time
                     if ((__userUUID != undefined) && (current_time - __lastFocusTime > 60*1000*UA_FOCUS_DETACH))
                     {
-                        __UAEventUserEnded(UA_METHOD_NAME_GAME_LOST_FOCUS, UA_SESSION_END_STATE_PAUSED);
+                        __UAEventUserEnded(UA_SDK_METHOD_GAME_LOST_FOCUS, UA_SESSION_END_STATE_PAUSED);
                         
                         __lastRunningTime = current_time;
                         
                         __userStartTime = date_current_datetime();
                         __sessionID     = __UAGenerateUUID();
-                        __UAEventUserStarted(UA_METHOD_NAME_GAME_REGAINED_FOCUS);
+                        __UAEventUserStarted(UA_SDK_METHOD_GAME_REGAINED_FOCUS);
                     }
                 }
             }
@@ -114,7 +114,7 @@ function __UASystem()
             
             if ((current_time - __lastRunningTime > UA_RUNNING_EVENT_DELAY) && (__userUUID != undefined) && __userConsentSet)
             {
-                __UAEventGameRunning(UA_METHOD_NAME_HEARTBEAT);
+                __UAEventGameRunning(UA_SDK_METHOD_HEARTBEAT);
             }
             
             if (_controllerInstance == undefined)

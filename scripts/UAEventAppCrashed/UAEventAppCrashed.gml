@@ -8,5 +8,5 @@
 
 function UAEventAppCrashed()
 {
-    __UAEventUserEnded(UA_METHOD_NAME_APP_CRASHED, UA_SESSION_END_STATE_CRASHED, true);
+    __UAEventUserEnded(UA_SDK_METHOD_APP_CRASHED, UA_SESSION_END_STATE_CRASHED, true);
 }

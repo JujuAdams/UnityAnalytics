@@ -8,7 +8,7 @@ function __UAGameEndEvent()
         if (__userUUID == undefined) return;
         
         __UAConfigCallbackGameEnded();
-        __UAEventUserEnded(UA_METHOD_NAME_GAME_END_EVENT, UA_SESSION_END_STATE_STOPPED);
+        __UAEventUserEnded(UA_SDK_METHOD_GAME_END_EVENT, UA_SESSION_END_STATE_STOPPED);
         __UASendPendingEvents(true);
         
         //Save all pending payloads

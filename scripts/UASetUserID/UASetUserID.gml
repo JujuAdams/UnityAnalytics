@@ -30,7 +30,7 @@ function UASetUserID(_userID, _locale = os_get_language())
                 if (UA_DEBUG_LEVEL >= 2) __UATrace("Unsetting user UUID from \"", __userUUID, "\"");
                 
                 //Previous user stopped playing
-                __UAEventUserEnded(UA_METHOD_NAME_SET_USER, UA_SESSION_END_STATE_STOPPED);
+                __UAEventUserEnded(UA_SDK_METHOD_SET_USER, UA_SESSION_END_STATE_STOPPED);
                 __UASendPendingEvents(false);
             }
             
@@ -59,7 +59,7 @@ function UASetUserID(_userID, _locale = os_get_language())
                 if (UA_DEBUG_LEVEL >= 2) __UATrace("Setting user UUID to \"", _userUUID, "\" from \"", __userUUID, "\" (", _userID, ")");
                 
                 //Previous user stopped playing
-                __UAEventUserEnded(UA_METHOD_NAME_SET_USER, UA_SESSION_END_STATE_STOPPED);
+                __UAEventUserEnded(UA_SDK_METHOD_SET_USER, UA_SESSION_END_STATE_STOPPED);
                 __UASendPendingEvents(false);
             }
             else
@@ -77,7 +77,7 @@ function UASetUserID(_userID, _locale = os_get_language())
             __sessionID      = __UAGenerateUUID();
             
             //User started playing
-            __UAEventUserStarted(UA_METHOD_NAME_SET_USER);
+            __UAEventUserStarted(UA_SDK_METHOD_SET_USER);
             
             //Retag all events without a user ID
             var _i = 0;

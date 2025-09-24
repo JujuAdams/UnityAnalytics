@@ -21,18 +21,16 @@
 #macro UA_EVENT_NAME_DELETION_REQUESTED          "ddnaForgetMe"
 #macro UA_EVENT_NAME_DELETION_REQUESTED_VERSION  1
 
-/// I wrote this code a while ago so I have no idea where these magic strings have come from.
-/// Maybe if you send an invalid standard event the error message tells you?
-#macro UA_METHOD_NAME_SET_USER               "UASetUser"
-#macro UA_METHOD_NAME_GAME_LOST_FOCUS        "GameLostFocus"
-#macro UA_METHOD_NAME_GAME_REGAINED_FOCUS    "GameRegainedFocus"
-#macro UA_METHOD_NAME_GAME_END_EVENT         "GameEndEvent"
-#macro UA_METHOD_NAME_APP_CRASHED            "UAEventAppCrashed"
-#macro UA_METHOD_NAME_USER_WITHDREW_CONSENT  "UserWithdrewConsent"
-#macro UA_METHOD_NAME_ON_BOOT                "OnBoot"
-#macro UA_METHOD_NAME_HEARTBEAT              "SystemHeartbeat"
+/// These are arbitrary strings used to indicate the code origin of events.
+#macro UA_SDK_METHOD_SET_USER               "UASetUser"
+#macro UA_SDK_METHOD_GAME_LOST_FOCUS        "game lost focus"
+#macro UA_SDK_METHOD_GAME_REGAINED_FOCUS    "game regained focus"
+#macro UA_SDK_METHOD_GAME_END_EVENT         "Game End event"
+#macro UA_SDK_METHOD_APP_CRASHED            "UAEventAppCrashed"
+#macro UA_SDK_METHOD_USER_WITHDREW_CONSENT  "UASetUserConsent"
+#macro UA_SDK_METHOD_HEARTBEAT              "system heartbeat"
 
-/// Similarly, I don't remember where these come from either.
+/// These are arbitrary too and are used for the game state when the "gameEnded" event is emitted.
 #macro UA_SESSION_END_STATE_PAUSED   "paused"
 #macro UA_SESSION_END_STATE_STOPPED  "stopped"
 #macro UA_SESSION_END_STATE_CRASHED  "crashed"
