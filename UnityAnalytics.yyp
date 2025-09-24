@@ -44,7 +44,7 @@
     {"id":{"name":"__UAEventGameRunning","path":"scripts/__UAEventGameRunning/__UAEventGameRunning.yy",},},
     {"id":{"name":"__UAEventUserEnded","path":"scripts/__UAEventUserEnded/__UAEventUserEnded.yy",},},
     {"id":{"name":"__UAEventUserStarted","path":"scripts/__UAEventUserStarted/__UAEventUserStarted.yy",},},
-    {"id":{"name":"__UAGameEnd","path":"scripts/__UAGameEnd/__UAGameEnd.yy",},},
+    {"id":{"name":"__UAGameEndEvent","path":"scripts/__UAGameEndEvent/__UAGameEndEvent.yy",},},
     {"id":{"name":"__UAGenerateTimestamp","path":"scripts/__UAGenerateTimestamp/__UAGenerateTimestamp.yy",},},
     {"id":{"name":"__UAGenerateUUID","path":"scripts/__UAGenerateUUID/__UAGenerateUUID.yy",},},
     {"id":{"name":"__UAGetPlatformName","path":"scripts/__UAGetPlatformName/__UAGetPlatformName.yy",},},

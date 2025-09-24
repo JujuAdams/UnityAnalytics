@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__UAGameEnd",
+  "%Name":"__UAGameEndEvent",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__UAGameEnd",
+  "name":"__UAGameEndEvent",
   "parent":{
     "name":"(System)",
     "path":"folders/Unity Analytics/(System).yy",
