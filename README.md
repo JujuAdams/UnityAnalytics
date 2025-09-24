@@ -6,26 +6,93 @@
 
 &nbsp;
 
-## Quick Start
-
- 1. Register a Unity services account and create an analytics project.
- 2. Obtain the project ID (a hexadecimal string) and environment ID (usually "production").
- 3. Import the Unity Analytics .yymps into your project.
- 4. Open `__UAConfig` and adjust `UA_PROJECT_ID` and `UA_ENVIRONMENT_ID`.
- 5. Execute the following code on boot:
-     ```gml
-     UASetUserID(UAEnsureUserID("analyticsUserID.dat"));
-     UASetUserConsent(true);
-     ```
- 6. Run your game on Windows, MacOS, or Linux. The library will automatically send a "gameStarted" event to UA.
- 7. Wait 5 minutes then check the Unity Analytics event browser. You should see a valid "gameStarted" event appear.
- 8. Define some custom events in the UA backend. Call `UAEvent()` in your code to match these custom events.
- 9. Set `UA_DEBUG_LEVEL` to 1 or 2 to help with debugging. Run the game and check events are being triggered properly.
- 9. Wait 5 minutes then check the event browser to confirm your custom events have been received.
-10. Remove the `UASetUserConsent()` call on boot and build a user consent flow for analytics in your game.
-
-And you're done! Please read comments in the library's functions (there aren't many) to learn about advanced use. This library **should** work on every platform that allows outgoing HTTP requests but has only been tested on desktop and mobile.
-
 ## Considerations
 
+Unity Analytics is free to use within limits. At the time of writing, it is free so long as you have less than 50,000 unique monthly active users. Each user may submit up to 500 **custom** events per month. Please check [the official pricing](https://docs.unity.com/ugs/en-us/manual/analytics/manual/billing) before commiting to using Unity Analytics.
+
+This library will automatically handle sending `"gameStarted"` `"gameRunning"` and `"gameEnded"` events. These are [**standard** events](https://docs.unity.com/ugs/en-us/manual/analytics/manual/standard-events) and do not count towards your 500-per-month limit. The `"gameStarted"` event is called when a user ID is set (or changed from one user to another). `"gameEnded"` is called when the game application naturally closes (the user closes the game window or `game_end()` is called). `gameRunning` is sent once every minute as a heartbeat to indicate the application is open, running, and probably being played.
+
+You can also send `"gameEnded"` events if the game crashes by calling `UAEventAppCrashed()`. This would typically be in an exception handler set by GameMaker's [`exception_unhandled_handler()`](https://manual.gamemaker.io/lts/en/GameMaker_Language/GML_Reference/Debugging/exception_unhandled_handler.htm). At any rate, if analytics events fail to be delivered to Unity's servers, this library will store them for resubmission when the application is relaunched.
+
+You may submit both standard events and custom events by calling `UAEvent()`. You will need to write event schema for custom events in the Unity backend. Getting the payloads right for standard events can take time so be sure to monitor the Invalid Events panel in the Analytics' backend Event Browser carefully
+
+User consent is extremely important and you have a legal and ethical obligation to handle user consent carefully. This library will not send analytics events unless `UASetUserConsent(true)` is called. Even if the user does not consent to analytics collection, you should still cal `UASetUserConsent(false)` to ensure user privacy is maintained. User consent is reset when changing user ID with `UASetUserID()` so bear that in mind if you have software that supports user switching.
+
 This library does not support PIPL, the 2021 Chinese privacy legislation. You can read more about PIPL and Unity Analytics [here](https://docs.unity.com/ugs/en-us/manual/analytics/manual/record-event-rest-api#sending-pipl-consents) if you would like to implement it.
+
+Please consult the Unity Analytics documentation for more information:
+- https://services.docs.unity.com/analytics/v1/index.html
+- https://docs.unity.com/ugs/en-us/manual/analytics/manual/overview
+
+&nbsp;
+
+## Guide
+
+1. **Sign in to a Unity Cloud account**
+
+     You can sign up for a new account at https://cloud.unity.com/
+
+2. **Create an analytics project.**
+
+    If you're new to Unity Cloud then you'll be prompted to create a new project when you open the web page. Otherwise, choose an existing project. Open the project via the dashboard and click on the Services tab. Scroll down and click on the "Launch" button next to Analytics. Wait for the Analytics service to load up (can take a couple of minutes sometimes) and you'll see you have some lovely graphs showing a total of 0 daily active users.
+
+3. **Obtain the project ID (a hexadecimal string) and environment ID ("production" by default).**
+
+    Return to the project page and click the Settings tab. The project ID is found on this page. The environment ID can be found on the Analytics service page in a dropdown menu near the top of the page. You'll probably want to create a new environment called "development" for testing the library.
+
+4. **Import the Unity Analytics .yymps into your project.**
+
+    If you have an older version of Unity Analytics floating around, make sure to delete it entirely before importing a newer version.
+
+5. **Open `__UAConfig` and adjust `UA_PROJECT_ID` and `UA_ENVIRONMENT_ID`.**
+
+    Make sure the strings are identical, including any dashes/hyphens.
+
+6. **Also adjust `UA_GAME_VERSION`. You'll need to keep this macro up-to-date as you release new versions.**
+
+    I like to map this macro to a game-wide macro to keep things neat and tidy.
+
+7. **Execute the following code on boot:**
+   
+    ```gml
+    UASetUserID(UAEnsureUserID("ua.dat"));
+    UASetUserConsent(true);
+    ```
+   
+    This code will create a user ID and store it locally on the device. The next function will forcibly consent to analytics. You should **never** do this in production. Instead, ask the user for consent to collect analytics when the game first boots. Save this flag in their savedata and reapply consent (or disapproval) using `UASetUserConsent()` when they reload the game.
+   
+    **N.B.** Even if a user does not consent to analytics, you should still call `UASetUserConsent()` as soon after `UASetUserID()` as possible.
+    
+8. **Run your game on Windows, MacOS, or Linux. The library will automatically send a "gameStarted" event to UA.**
+    
+    The library has a number of automatic features.
+
+9. **Wait 5 minutes then check the Unity Analytics event browser. You should see a valid "gameStarted" event appear.**
+
+    Cross your fingers! It can be hard to debug analytics sometimes because there are a lot of moving parts. I've found that the Event Browser on the Analytics service page is helpful too, especially the "Invalid Events" tab.
+
+10. **Define custom event schemas in the Analytics service backend. Make sure to enable new events!**
+
+    You can do this via the Event Manager. You can attach pretty much whatever data you want to these events; however, you should be mindful of size limits and rate limits. There's a tickbox at the bottom of the "Add Custom Events" panel that enables the event for you. If you miss it, you will need to manually enable the event before collection can start.
+
+11. **Call `UAEvent()` in your code to match these custom events.**
+
+    The JSON that you send must be compliant with the event schema you define otherwise the service will complain and not collect your events.
+
+12. **Set `UA_DEBUG_LEVEL` to `1` or `2` to help with debugging. Run the game and check events are being triggered properly.**
+
+    Don't forget to set this macro to `0` for production.
+
+13. **Wait 5 minutes then check the event browser to confirm your custom events have been received.**
+
+    Nailing-biting stuff. Real edge-of-your-seat scenario.
+
+14. **Remove the `UASetUserConsent(true)` call on boot and build a user consent flow for analytics in your game.**
+
+    Wise man say "respecting consent lead to great fortune, ignoring consent lead to Civil Court".
+
+15. **Add a button to delete analytics data to a Settings menu etc.**
+
+    This means calling `UARequestDeletion()`.
+
+And you're done!
