@@ -33,6 +33,9 @@
    forcibly consent to analytics. You should **never** do this in production. Instead, ask the user
    for consent to collect analytics when the game first boots. Save this flag in their savedata and
    reapply consent (or disapproval) using `UASetUserConsent()` when they reload the game.
+   
+   N.B.  Even if a user does not consent to analytics, you should still call `UASetUserConsent()`
+         as soon after `UASetUserID()` as possible.
     
 8. Run your game on Windows, MacOS, or Linux. The library will automatically send a "gameStarted" event to UA.
     The library has a number of automatic features.
