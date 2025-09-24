@@ -33,10 +33,6 @@ function UAEvent(_eventName, _eventParams, _highPriority = false, _eventVersion 
     //Don't queue up events if the user hasn't consented
     if (_system.__userConsentSet && (not _system.__userConsent)) return;
     
-    //Stack up event in a separate array if no user ID has been set yet
-    //If an event ends up in the "no user" array then we'll retag those events when setting a user ID
-    var _eventArray = (_system.__userUUID == undefined)? _noUserEventArray : _pendingEventArray;
-    
     //Create a new event struct
     var _event = new __UAClassEvent(_system.__userUUID, _eventVersion, _eventName, _eventParams);
     if (UA_DEBUG_LEVEL >= 1) __UATrace(_eventName, (_eventVersion != undefined)? (" (v" + string(_eventVersion) + ") ") : " ", _highPriority? "PRIORITY" : "", ": ", json_stringify(_eventParams));
@@ -48,7 +44,11 @@ function UAEvent(_eventName, _eventParams, _highPriority = false, _eventVersion 
     }
     else
     {
-        //Queue this event
+        //Stack up event in a separate array if no user ID has been set yet
+        //If an event ends up in the "no user" array then we'll retag those events when setting a user ID
+        var _eventArray = (_system.__userUUID == undefined)? _noUserEventArray : _pendingEventArray;
         array_push(_eventArray, _event);
     }
+    
+    return _event;
 }

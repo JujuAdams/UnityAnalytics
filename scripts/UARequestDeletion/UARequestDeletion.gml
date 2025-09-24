@@ -13,10 +13,19 @@ function UARequestDeletion()
 {
     static _system = __UASystem();
     
+    if (_system.__userUUID == undefined)
+    {
+        if (UA_DEBUG_LEVEL >= 1) __UATrace("Warning! Cannot request deletion, user ID is unset");
+        return;
+    }
+    
+    if (UA_DEBUG_LEVEL >= 1) __UATrace("Requesting data deletion for user ID \"", _system.__userUUID, "\"");
+    
     var _payload = {};
     _payload.clientVersion = string(UA_GAME_CLIENT_VERSION);
     _payload.sdkMethod     = "UARequestDeletion";
     _payload.userLocale    = _system.__userLocale;
     
-    UAEvent(UA_EVENT_NAME_DELETION_REQUESTED, _payload, true, UA_EVENT_NAME_DELETION_REQUESTED_VERSION);
+    var _event = new __UAClassEvent(_system.__userUUID, UA_EVENT_NAME_DELETION_REQUESTED_VERSION, UA_EVENT_NAME_DELETION_REQUESTED, _payload);
+    __UAPayloadSend(_event);
 }
