@@ -9,12 +9,14 @@
 
 #macro UA_RUNNING_FROM_IDE  (GM_build_type == "run")
 
+/// Magic values to interface with Unity Analytics' standard events.
 #macro UA_EVENT_NAME_USER_STARTED          "gameStarted"
 #macro UA_EVENT_NAME_USER_STARTED_VERSION  1
+#macro UA_EVENT_NAME_USER_ENDED            "gameEnded"
+#macro UA_EVENT_NAME_USER_ENDED_VERSION    1
 
-#macro UA_EVENT_NAME_USER_ENDED          "gameEnded"
-#macro UA_EVENT_NAME_USER_ENDED_VERSION  1
-
+/// I wrote this code a while ago so I have no idea where these magic strings have come from.
+/// Maybe if you send an invalid standard event the error message tells you?
 #macro UA_METHOD_NAME_SET_USER               "UASetUser"
 #macro UA_METHOD_NAME_GAME_LOST_FOCUS        "GameLostFocus"
 #macro UA_METHOD_NAME_GAME_REGAINED_FOCUS    "GameRegainedFocus"
@@ -23,6 +25,7 @@
 #macro UA_METHOD_NAME_USER_WITHDREW_CONSENT  "UserWithdrewConsent"
 #macro UA_METHOD_NAME_ON_BOOT                "OnBoot"
 
+/// Similarly, I don't remember where these come from either.
 #macro UA_SESSION_END_STATE_PAUSED   "paused"
 #macro UA_SESSION_END_STATE_STOPPED  "stopped"
 #macro UA_SESSION_END_STATE_CRASHED  "crashed"

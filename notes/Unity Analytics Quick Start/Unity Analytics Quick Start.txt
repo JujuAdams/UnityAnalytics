@@ -42,11 +42,11 @@
     moving parts. I've found that the Event Browser on the Analytics service page is helpful too,
     especially the "Invalid Events" tab.
 
-10. Define custom event schemas in the Analytics service backend.
+10. Define custom event schemas in the Analytics service backend. Make sure to enable new events!
     You can do this via the Event Manager. You can attach pretty much whatever data you want to
-    these events; however, you should be mindful of size limits and rate limits. I don't recall
-    seeing clear documentation on a maximum event size or a maximum number of events per second but
-    try not to push your luck.
+    these events; however, you should be mindful of size limits and rate limits. There's a tickbox
+    at the bottom of the "Add Custom Events" panel that enables the event for you. If you miss it,
+    you will need to manually enable the event before collection can start.
 
 11. Call `UAEvent()` in your code to match these custom events.
     The JSON that you send must be compliant with the event schema you define otherwise the service
