@@ -47,3 +47,8 @@ UIButton("Request deletion", function()
 {
     UARequestDeletion();
 });
+UINewline();
+UIButton("game_end()", function()
+{
+    game_end();
+});

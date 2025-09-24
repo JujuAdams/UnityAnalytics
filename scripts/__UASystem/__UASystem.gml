@@ -33,7 +33,7 @@ function __UASystem()
         
         __sentEventMap = ds_map_create();
         
-        __UATrace("Welcome to Unity Analytics by Juju Adams! This is version ", UA_VERSION, " ", UA_DATE, "(GameMaker ", GM_version, ")");
+        __UATrace("Welcome to Unity Analytics by Juju Adams! This is version ", UA_VERSION, " ", UA_DATE, " (GameMaker ", GM_runtime_version, ")");
         
         if (UA_PROJECT_ID == "")
         {
