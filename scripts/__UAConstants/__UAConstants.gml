@@ -21,6 +21,7 @@
 #macro UA_METHOD_NAME_GAME_END_EVENT         "GameEndEvent"
 #macro UA_METHOD_NAME_APP_CRASHED            "UAEventAppCrashed"
 #macro UA_METHOD_NAME_USER_WITHDREW_CONSENT  "UserWithdrewConsent"
+#macro UA_METHOD_NAME_ON_BOOT                "OnBoot"
 
 #macro UA_SESSION_END_STATE_PAUSED   "paused"
 #macro UA_SESSION_END_STATE_STOPPED  "stopped"

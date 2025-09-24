@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// https://docs.unity.com/ugs/en-us/manual/analytics/manual/record-event-rest-api
+
 /*
 {
     "eventName": "specific event code - eg. gameStarted",

@@ -7,6 +7,9 @@
 #macro UA_PROJECT_ID      ""
 #macro UA_ENVIRONMENT_ID  "production"
 
+/// Game version string, used to determine the `.clientVersion` field for events.
+#macro UA_GAME_CLIENT_VERSION  GM_version
+
 /// Debug level for the library. This affects how "noisy" the library is whilst it's doing its
 /// thing. A high debug level of 2 is useful for debugging issues but can make it hard to read
 /// your debug log;
@@ -24,7 +27,7 @@
 /// be used to detect unexpected terminations of the game. This feature is only enabled on Windows,
 /// MacOS, Linux, Android, iOS, and tvOS. If you don't want to use this feature, set the macro to
 /// `infinity`.
-#macro UA_HEARTBEAT_DELAY  1
+#macro UA_HEARTBEAT_DELAY  5
 
 /// Internal string used to protect user privacy. If you would like to use literal user IDs for your
 /// analytics, set this macro to `undefined`. You should only ever do this for testing purposes.

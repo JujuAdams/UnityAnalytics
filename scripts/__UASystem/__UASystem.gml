@@ -74,7 +74,8 @@ function __UASystem()
                 buffer_delete(_buffer);
                 
                 var _payload = __UAConfigEventUserEnded();
-                _payload.sdkMethod       = "OnBoot";
+                _payload.clientVersion   = string(UA_GAME_CLIENT_VERSION);
+                _payload.sdkMethod       = UA_METHOD_NAME_ON_BOOT;
                 _payload.sessionEndState = UA_SESSION_END_STATE_CRASHED;
                 
                 var _event = new __UAClassEvent(_userUUID, UA_EVENT_NAME_USER_ENDED_VERSION, _payload);
