@@ -25,3 +25,7 @@
 10. Remove the `UASetUserConsent()` call on boot and build a user consent flow for analytics in your game.
 
 And you're done! Please read comments in the library's functions (there aren't many) to learn about advanced use. This library **should** work on every platform that allows outgoing HTTP requests but has only been tested on desktop and mobile.
+
+## Considerations
+
+This library does not support PIPL, the 2021 Chinese privacy legislation. You can read more about PIPL and Unity Analytics [here](https://docs.unity.com/ugs/en-us/manual/analytics/manual/record-event-rest-api#sending-pipl-consents) if you would like to implement it.
