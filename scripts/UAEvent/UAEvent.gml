@@ -50,6 +50,12 @@ function UAEvent(_eventName, _eventParams, _highPriority = false, _eventVersion 
         //If an event ends up in the "no user" array then we'll retag those events when setting a user ID
         var _eventArray = (_system.__userUUID == undefined)? _noUserEventArray : _pendingEventArray;
         array_push(_eventArray, _event);
+        
+        if (array_length(_eventArray) > UA_MAX_EVENT_COUNT)
+        {
+            array_shift(_eventArray);
+            __UATrace("Warning! Pending event count has exceeded ", UA_MAX_EVENT_COUNT, ". Did you remember to call `UASetUserConsent()`?");
+        }
     }
     
     return _event;
