@@ -5,11 +5,20 @@
 
 #macro UA_COLLECT_ENDPOINT  ("https://collect.analytics.unity3d.com/api/analytics/collect/v1/projects/" + UA_PROJECT_ID + "/environments/" + UA_ENVIRONMENT_ID)
 
+#macro UA_RUNNING_FROM_IDE  (GM_build_type == "run")
+
 #macro UA_EVENT_NAME_USER_STARTED          "gameStarted"
 #macro UA_EVENT_NAME_USER_STARTED_VERSION  1
 
 #macro UA_EVENT_NAME_USER_ENDED          "gameEnded"
 #macro UA_EVENT_NAME_USER_ENDED_VERSION  1
+
+#macro UA_METHOD_NAME_SET_USER               "UASetUser"
+#macro UA_METHOD_NAME_GAME_LOST_FOCUS        "GameLostFocus"
+#macro UA_METHOD_NAME_GAME_REGAINED_FOCUS    "GameRegainedFocus"
+#macro UA_METHOD_NAME_GAME_END_EVENT         "GameEndEvent"
+#macro UA_METHOD_NAME_APP_CRASHED            "UAEventAppCrashed"
+#macro UA_METHOD_NAME_USER_WITHDREW_CONSENT  "UserWithdrewConsent"
 
 #macro UA_SESSION_END_STATE_PAUSED   "paused"
 #macro UA_SESSION_END_STATE_STOPPED  "stopped"

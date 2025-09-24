@@ -110,13 +110,13 @@ function __UASystem()
                     //Focus restored, compare against last focus time
                     if ((__userUUID != undefined) && (current_time - __lastFocusTime > 60*1000*UA_FOCUS_DETACH))
                     {
-                        __UAEventUserEnded("GameLostFocus", UA_SESSION_END_STATE_PAUSED);
+                        __UAEventUserEnded(UA_METHOD_NAME_GAME_LOST_FOCUS, UA_SESSION_END_STATE_PAUSED);
                         
                         __lastHeartbeatTime = -infinity;
                         
                         __userStartTime = date_current_datetime();
                         __sessionID     = __UAGenerateUUID();
-                        __UAEventUserStarted("GameRegainedFocus");
+                        __UAEventUserStarted(UA_METHOD_NAME_GAME_REGAINED_FOCUS);
                     }
                 }
             }
@@ -145,7 +145,7 @@ function __UASystem()
             
             if ((_controllerInstance != undefined) && (not instance_exists(_controllerInstance)))
             {
-                if (GM_build_type == "run")
+                if (UA_RUNNING_FROM_IDE)
                 {
                     __UAError("UnityAnalyticsController must not be destroyed or deactivated");
                 }

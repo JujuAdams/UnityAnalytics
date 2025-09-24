@@ -7,7 +7,7 @@ function __UAGenerateUUID(_hyphenate = true)
     //As per https://www.cryptosys.net/pki/uuid-rfc4122.html (though without the hyphens)
     var _UUID = md5_string_unicode(string(current_time) + string(date_current_datetime()) + string(__UAXORShift32Random(1000000)));
     _UUID = string_set_byte_at(_UUID, 13, ord("4"));
-    _UUID = string_set_byte_at(_UUID, 17, ord(__SnitchXORShift32Choose("8", "9", "a", "b")));
+    _UUID = string_set_byte_at(_UUID, 17, ord(__UAXORShift32Choose("8", "9", "a", "b")));
     
     if (_hyphenate)
     {
@@ -16,10 +16,6 @@ function __UAGenerateUUID(_hyphenate = true)
     
     return _UUID;
 }
-
-////Set up the XORShift32 starting seed
-////Can throw in a randomize() / random() call here too if you'd like but 1) that might mess up other stuff? 2) feels unnecessary
-//__SnitchState().__XORShift32State = floor(1000000*date_current_datetime() + display_mouse_get_x() + display_get_width()*display_mouse_get_y());
 
 //Basic XORShift32, nothing fancy
 function __UAXORShift32Random(_value)
@@ -31,7 +27,7 @@ function __UAXORShift32Random(_value)
     return _value * abs(_state) / (real(0x7FFFFFFFFFFFFFFF) + 1.0);
 }
 
-function __SnitchXORShift32Choose()
+function __UAXORShift32Choose()
 {
     return argument[floor(__UAXORShift32Random(argument_count))];
 }
