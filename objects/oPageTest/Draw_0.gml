@@ -42,3 +42,8 @@ UIButton("Test UAEventAppCrashed()", function()
     
     show_error("Forced error to test UAEventAppCrashed()", true);
 });
+UINewline();
+UIButton("Request deletion", function()
+{
+    UARequestDeletion();
+});
