@@ -21,7 +21,7 @@
 
 /// Minutes before treating out-of-focus as a new gameplay session. Set this value to `infinity`
 /// if you want to turn off this feature.
-#macro UA_FOCUS_DETACH  30
+#macro UA_FOCUS_DETACH  20
 
 /// How often (in minutes) to save a small file to record when the game was last active. This can
 /// be used to detect unexpected terminations of the game. This feature is only enabled on Windows,

@@ -39,29 +39,28 @@
 
 9. Wait 5 minutes then check the Unity Analytics event browser. You should see a valid "gameStarted" event appear.
     Cross your fingers! It can be hard to debug analytics sometimes because there are a lot of
-    moving parts. If you get stuck, set `UA_DEBUG_LEVEL` to `2` and see if you can figure out
-    what's going on.
+    moving parts. I've found that the Event Browser on the Analytics service page is helpful too,
+    especially the "Invalid Events" tab.
 
-10. Define some custom events in the UA backend. Call `UAEvent()` in your code to match these custom events.
-    You can attach pretty much whatever data you want to these events; however, you should be
-    mindful of size limits and rate limits. I don't recall seeing clear documentation on a maximum
-    event size or a maximum number of events per second but try not to push your luck.
+10. Define custom event schemas in the Analytics service backend.
+    You can do this via the Event Manager. You can attach pretty much whatever data you want to
+    these events; however, you should be mindful of size limits and rate limits. I don't recall
+    seeing clear documentation on a maximum event size or a maximum number of events per second but
+    try not to push your luck.
 
-11. Set `UA_DEBUG_LEVEL` to `1` or `2` to help with debugging. Run the game and check events are being triggered properly.
+11. Call `UAEvent()` in your code to match these custom events.
+    The JSON that you send must be compliant with the event schema you define otherwise the service
+    will complain and not collect your events.
+
+12. Set `UA_DEBUG_LEVEL` to `1` or `2` to help with debugging. Run the game and check events are being triggered properly.
     Don't forget to set this macro to `0` for production.
 
-12. Wait 5 minutes then check the event browser to confirm your custom events have been received.
+13. Wait 5 minutes then check the event browser to confirm your custom events have been received.
     Nailing-biting stuff. Real edge-of-your-seat scenario.
 
-13. Remove the `UASetUserConsent(true)` call on boot and build a user consent flow for analytics in your game.
+14. Remove the `UASetUserConsent(true)` call on boot and build a user consent flow for analytics in your game.
     Wise man say "respecting consent lead to great fortune, ignoring consent lead to Civil Court".
 
 And you're done!
 
 Please consult the Unity Analytics REST API documentation for more information: https://services.docs.unity.com/analytics/v1/index.html
-
-//1. Register a Unity services account
-//     Documentation for making a service account for Multiplay can be found here: https://docs.unity.com/ugs/en-us/manual/game-server-hosting/manual/concepts/authentication-service-accounts
-//     The process for analytics is similar. Go to your Unity dashboard (https://cloud.unity.com/)
-//     then click Administration in the toolbar on the right, then Service Accounts. Click +New in
-//     the top-right corner of the screen.
