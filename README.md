@@ -8,7 +8,7 @@
 
 ## Considerations
 
-This library will automatically handle sending `"gameStarted"` `"gameRunning"` and `"gameEnded"` events. The `"gameStarted"` is called when a user ID is set (or changed from one user to another). `"gameEnded"` is called when the game application naturally closes (the user closes the game window or `game_end()` is called). You can also send `"gameEnded"` events if the game crashes by calling `UAEventAppCrashed()`. If analytics events fail to be delivered to Unity's servers, this library will store them for later resubmission.
+This library will automatically handle sending `"gameStarted"` `"gameRunning"` and `"gameEnded"` events. The `"gameStarted"` event is called when a user ID is set (or changed from one user to another). `"gameEnded"` is called when the game application naturally closes (the user closes the game window or `game_end()` is called). You can also send `"gameEnded"` events if the game crashes by calling `UAEventAppCrashed()` in an exception handler set by GameMaker's [`exception_unhandled_handler()`](https://manual.gamemaker.io/lts/en/GameMaker_Language/GML_Reference/Debugging/exception_unhandled_handler.htm). If analytics events fail to be delivered to Unity's servers, this library will store them for later resubmission.
 
 User consent is extremely important and you have a legal and ethical obligation to handle user consent carefully. This library will not send analytics events unless `UASetUserConsent(true)` is called. Even if the user does not consent to analytics collection, you should still cal `UASetUserConsent(false)` to ensure user privacy is maintained. User consent is reset when changing user ID with `UASetUserID()` so bear that in mind if you have software that supports user switching.
 
