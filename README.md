@@ -63,9 +63,9 @@ Please consult the Unity Analytics documentation for more information:
    
     **N.B.** Even if a user does not consent to analytics, you should still call `UASetUserConsent()` as soon after `UASetUserID()` as possible.
     
-8. **Run your game on Windows, MacOS, or Linux. The library will automatically send a "gameStarted" event to UA.**
+8. **Run your game on Windows, MacOS, or Linux. The library will automatically send events to UA.**
     
-    The library has a number of automatic features.
+    The library has a number of automatic features. `gameStarted` will be sent as soon as a user ID is set and the user consent to analytics, and `gameRunning` will be sent every minute after that. `gameEnded` will be sent when the game closes naturally or when `UAEventAppCrashed()` is called.
 
 9. **Wait 5 minutes then check the Unity Analytics event browser. You should see a valid "gameStarted" event appear.**
 
