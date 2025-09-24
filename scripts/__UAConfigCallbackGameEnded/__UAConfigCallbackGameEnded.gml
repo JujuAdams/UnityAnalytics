@@ -6,7 +6,7 @@
 /// tracking what level the user closed the game on.
 /// 
 /// Events created in this callback will be sent immediately as the game closes so setting "high
-/// priority" for calls to UAEvent() is unnecessary.
+/// priority" for calls to `UAEvent()` is unnecessary.
 
 function __UAConfigCallbackGameEnded()
 {

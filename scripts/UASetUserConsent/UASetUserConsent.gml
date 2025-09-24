@@ -1,8 +1,9 @@
 // Feather disable all
 
 /// Sets whether the user has consented to analytics being collected. You should call this *after*
-/// UASetUserID() for the user giving (or declining) consent. You should further call this function
-/// if the user changes their consent status.
+/// `UASetUserID()` for the user giving (or declining) consent. You should further call this
+/// function if the user changes their consent status. You should also call this function every
+/// time the game boots, usually from the point at which userdata is loaded.
 /// 
 /// N.B. If you don't call this function then no analytics data will be sent.
 /// 

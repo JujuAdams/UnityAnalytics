@@ -4,11 +4,11 @@
 /// your game, even if the game application itself has not been resetarted. This includes things
 /// like account changes on consoles etc.
 /// 
-/// N.B. After calling UASetUserID(), you must call UASetUserConsent(). No analytics will be sent
-///      until UASetUserConsent() is called.
+/// N.B. After calling `UASetUserID()`, you must call `UASetUserConsent()`. No analytics will be
+///      sent until `UASetUserConsent()` is called.
 /// 
 /// The locale argument can be used to specify the user's system locale. If not specified, the
-/// value returned by GameMaker's native os_get_language() is used instead.
+/// value returned by GameMaker's native `os_get_language()` is used instead.
 /// 
 /// @param userID
 /// @param [locale]

@@ -3,6 +3,12 @@
 /// Creates an analytics event and queues it for sending. This event corresponds to either a
 /// default UA event or a custom UA event, as set up in the Unity Analytics backend.
 /// 
+/// Events will not be processed at all if `UASetUserConsent()` is used to set decline consent.
+/// WHether the user has given consent is reset after calling `UASetUserID()` so make sure to call
+/// `UASetUserConsent()` as soon as possible. In the time between setting the user ID and giving
+/// consent (or declining) consent, events will be queued up. This means that events queued up
+/// before user consent to given will still be sent, albeit only after consent is given.
+/// 
 /// If an event is marked as "high priority" then, if possible, that event will be sent immediately
 /// and not queued for sending later. You almost certainly won't need to use this feature but it's
 /// there if you need it.

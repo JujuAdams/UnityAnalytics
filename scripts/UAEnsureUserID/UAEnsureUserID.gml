@@ -3,10 +3,10 @@
 /// Tries to find a user ID in a specific file in storage. If a user ID cannot be found, a new user
 /// ID is generated and saved to storage. This means that the user ID is consistent between play
 /// sessions allowing you to track the user journey. Once you have obtained a user ID with this
-/// function, you should call UASetUserID() to initialize the library for that user.
+/// function, you should call `UASetUserID()` to initialize the library for that user.
 /// 
 /// If you have a separate unique user ID available to you, for example a Steam ID, then you don't
-/// need to use this function and you can instead pass the existing user ID into UASetUserID().
+/// need to use this function and you can instead pass the existing user ID into `UASetUserID()`.
 /// 
 /// @param savePath
 

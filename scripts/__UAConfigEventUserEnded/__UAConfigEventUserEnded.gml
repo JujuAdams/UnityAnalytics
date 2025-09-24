@@ -11,6 +11,6 @@ function __UAConfigEventUserEnded()
     return {
         clientVersion: GM_version, //Required by UA!
         
-        //sdkMethod and sessionEndState are automatically filled out by the library
+        //`.sdkMethod` and `.sessionEndState` are automatically filled out by the library
     }
 }
