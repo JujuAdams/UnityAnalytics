@@ -7,7 +7,8 @@
 /// N.B. You **must** provide a way for users to request that analytics data associated with their
 ///      user ID be deleted.
 /// 
-/// https://docs.unity.com/ugs/en-us/manual/analytics/manual/request-data-deletion-rest-api
+/// Documentation and commentary on this feature can be found at:
+///     https://docs.unity.com/ugs/en-us/manual/analytics/manual/request-data-deletion-rest-api
 
 function UARequestDeletion()
 {

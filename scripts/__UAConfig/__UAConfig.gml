@@ -1,6 +1,8 @@
 // Feather disable all
 
-/// Unity Analytics REST API documentation can be found at https://services.docs.unity.com/analytics/v1/index.html
+/// Unity Analytics documentation can be found at:
+///    https://services.docs.unity.com/analytics/v1/index.html
+///    https://docs.unity.com/ugs/en-us/manual/analytics/manual/overview
 
 /// Identifiers for your project and project environment. You can retrieve these values from the
 /// Unity Analytics backend. You must fill out these values before this library will work.
