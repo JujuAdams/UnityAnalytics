@@ -5,7 +5,7 @@
 #macro UA_VERSION  "2.0.1"
 #macro UA_DATE     "2024-07-11"
 
-#macro UA_RUNNING_EVENT_DELAY  (60*1000) //ms
+#macro UA_RUNNING_EVENT_DELAY  (1000) //ms
 
 #macro UA_COLLECT_ENDPOINT  ("https://collect.analytics.unity3d.com/api/analytics/collect/v1/projects/" + UA_PROJECT_ID + "/environments/" + UA_ENVIRONMENT_ID)
 
@@ -14,6 +14,8 @@
 /// Magic values to interface with Unity Analytics' standard events.
 #macro UA_EVENT_NAME_USER_STARTED                "gameStarted"
 #macro UA_EVENT_NAME_USER_STARTED_VERSION        1
+#macro UA_EVENT_NAME_GAME_RUNNING                "gameRunning"
+#macro UA_EVENT_NAME_GAME_RUNNING_VERSION        1
 #macro UA_EVENT_NAME_USER_ENDED                  "gameEnded"
 #macro UA_EVENT_NAME_USER_ENDED_VERSION          1
 #macro UA_EVENT_NAME_DELETION_REQUESTED          "ddnaForgetMe"
@@ -28,6 +30,7 @@
 #macro UA_METHOD_NAME_APP_CRASHED            "UAEventAppCrashed"
 #macro UA_METHOD_NAME_USER_WITHDREW_CONSENT  "UserWithdrewConsent"
 #macro UA_METHOD_NAME_ON_BOOT                "OnBoot"
+#macro UA_METHOD_NAME_HEARTBEAT              "SystemHeartbeat"
 
 /// Similarly, I don't remember where these come from either.
 #macro UA_SESSION_END_STATE_PAUSED   "paused"

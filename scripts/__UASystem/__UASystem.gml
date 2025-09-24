@@ -19,7 +19,7 @@ function __UASystem()
         
         __osPaused        = os_is_paused();
         __lastFocusTime   = current_time;
-        __lastRunningTime = -infinity;
+        __lastRunningTime = current_time;
         
         __userUUID      = undefined;
         __userStartTime = undefined;
@@ -74,6 +74,19 @@ function __UASystem()
         
         with(_system)
         {
+            if ((_controllerInstance != undefined) && (not instance_exists(_controllerInstance)))
+            {
+                if (UA_RUNNING_FROM_IDE)
+                {
+                    __UAError("Object instance `UnityAnalyticsController` must not be destroyed or deactivated");
+                }
+                else
+                {
+                    _controllerInstance = undefined;
+                    __UATrace("Warning! Object instance `UnityAnalyticsController` was destroyed or deactivated");
+                }
+            }
+            
             if (os_is_paused() != __osPaused)
             {
                 __osPaused = os_is_paused();
@@ -85,7 +98,7 @@ function __UASystem()
                     {
                         __UAEventUserEnded(UA_METHOD_NAME_GAME_LOST_FOCUS, UA_SESSION_END_STATE_PAUSED);
                         
-                        __lastRunningTime = -infinity;
+                        __lastRunningTime = current_time;
                         
                         __userStartTime = date_current_datetime();
                         __sessionID     = __UAGenerateUUID();
@@ -99,17 +112,9 @@ function __UASystem()
                 __lastFocusTime = current_time;
             }
             
-            if ((_controllerInstance != undefined) && (not instance_exists(_controllerInstance)))
+            if ((current_time - __lastRunningTime > UA_RUNNING_EVENT_DELAY) && (__userUUID != undefined) && __userConsentSet)
             {
-                if (UA_RUNNING_FROM_IDE)
-                {
-                    __UAError("Object instance `UnityAnalyticsController` must not be destroyed or deactivated");
-                }
-                else
-                {
-                    _controllerInstance = undefined;
-                    __UATrace("Warning! Object instance `UnityAnalyticsController` was destroyed or deactivated");
-                }
+                __UAEventGameRunning(UA_METHOD_NAME_HEARTBEAT);
             }
             
             if (_controllerInstance == undefined)

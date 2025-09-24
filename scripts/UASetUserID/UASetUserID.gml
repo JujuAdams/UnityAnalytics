@@ -67,7 +67,7 @@ function UASetUserID(_userID, _locale = os_get_language())
                 if (UA_DEBUG_LEVEL >= 2) __UATrace("Set user UUID to \"", _userUUID, "\" (", _userID, ")");
             }
             
-            __lastRunningTime = -infinity;
+            __lastRunningTime = current_time;
             
             __userUUID       = _userUUID;
             __userStartTime  = date_current_datetime();

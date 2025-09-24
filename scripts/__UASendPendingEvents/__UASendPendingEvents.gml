@@ -20,7 +20,8 @@ function __UASendPendingEvents(_forceAll)
         {
             __UATrace("Warning! Exceeded maximum pending requests ", UA_MAX_PENDING_REQUESTS);
         }
-        else if (_forceAll || (current_time - _lastSend > UA_SEND_DELAY))
+        
+        if (_forceAll || (current_time - _lastSend > UA_SEND_DELAY))
         {
             _lastSend = current_time;
             var _count = min(_length, UA_MAX_EVENTS_PER_REQUEST);

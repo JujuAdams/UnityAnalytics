@@ -4,7 +4,8 @@
 
 function __UAPayloadSend(_payload)
 {
-    static _sentEventMap = __UASystem().__sentEventMap;
+    static _system = __UASystem();
+    static _sentEventMap = _system.__sentEventMap;
     
     static _headerMap = (function()
     {
@@ -18,4 +19,6 @@ function __UAPayloadSend(_payload)
     
     if (UA_DEBUG_LEVEL >= 2) __UATrace("Request ID ", _requestID, " started          ", _body);
     _sentEventMap[? _requestID] = _payload;
+    
+    _system.__lastRunningTime = current_time;
 }
