@@ -14,6 +14,8 @@ function UARequestDeletion()
 {
     static _system = __UASystem();
     
+    if (UA_BLOCKED) return;
+    
     if (_system.__userUUID == undefined)
     {
         if (UA_RUNNING_FROM_IDE)

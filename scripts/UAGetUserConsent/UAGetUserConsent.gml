@@ -7,5 +7,8 @@
 function UAGetUserConsent()
 {
     static _system = __UASystem();
+    
+    if (UA_BLOCKED) return false;
+    
     return _system.__userConsent;
 }

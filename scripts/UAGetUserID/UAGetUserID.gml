@@ -7,5 +7,7 @@ function UAGetUserID()
 {
     static _system = __UASystem();
     
+    if (UA_BLOCKED) return undefined;
+    
     return _system.__userUUID;
 }

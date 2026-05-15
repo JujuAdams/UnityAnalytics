@@ -8,6 +8,8 @@
 
 function UAEventAppCrashed()
 {
+    if (UA_BLOCKED) return;
+    
     __UAEventUserEnded(UA_SDK_METHOD_APP_CRASHED, UA_SESSION_END_STATE_CRASHED, true);
     __UAGameEndEvent();
 }

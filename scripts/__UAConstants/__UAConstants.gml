@@ -7,6 +7,12 @@
 #macro UA_VERSION  "2.1.1"
 #macro UA_DATE     "2025-09-24"
 
+//Whether we have unfettered access to the file system
+#macro UA_FILE_SYSTEM_ACCESS  ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux) || (os_type == os_android) || (os_type == os_ios) || (os_type == os_tvos))
+
+//Whether Unity Analytics is blocked due to `UA_BLOCK_ON_CONSOLE`
+#macro UA_BLOCKED  ((not UA_FILE_SYSTEM_ACCESS) && UA_BLOCK_ON_CONSOLE)
+
 #macro UA_RUNNING_EVENT_DELAY  (60*1000) //ms
 #macro UA_MAX_EVENT_COUNT  1_000
 
@@ -37,7 +43,5 @@
 #macro UA_SESSION_END_STATE_PAUSED   "paused"
 #macro UA_SESSION_END_STATE_STOPPED  "stopped"
 #macro UA_SESSION_END_STATE_CRASHED  "crashed"
-
-#macro UA_FILE_SYSTEM_ACCESS  ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux) || (os_type == os_android) || (os_type == os_ios) || (os_type == os_tvos))
 
 #macro UA_PATH_PENDING_DAT  "uapending.dat"

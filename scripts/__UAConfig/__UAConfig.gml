@@ -12,6 +12,11 @@
 /// Game version string, used to determine the `.clientVersion` field for events.
 #macro UA_GAME_CLIENT_VERSION  GM_version
 
+/// Whether Unity Analytics should be blocked entirely when running on a console. This avoids
+/// potential compliance issues regarding stored user data. You are welcome to set this macro to
+/// `false` if you would like to go through the necessary compliance procedures.
+#macro UA_BLOCK_ON_CONSOLE  true
+
 /// Debug level for the library. This affects how "noisy" the library is whilst it's doing its
 /// thing. A high debug level of 2 is useful for debugging issues but can make it hard to read
 /// your debug log;

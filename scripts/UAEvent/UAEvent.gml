@@ -32,6 +32,8 @@ function UAEvent(_eventName, _eventParams, _highPriority = false, _eventVersion 
     static _noUserEventArray  = _system.__noUserEventArray;
     static _pendingEventArray = _system.__pendingEventArray;
     
+    if (UA_BLOCKED) return;
+    
     //Don't queue up events if the user hasn't consented
     if (_system.__userConsentSet && (not _system.__userConsent)) return;
     

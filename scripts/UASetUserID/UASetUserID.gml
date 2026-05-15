@@ -21,6 +21,8 @@ function UASetUserID(_userID, _locale = os_get_language())
 {
     static _system = __UASystem();
     
+    if (UA_BLOCKED) return;
+    
     with(_system)
     {
         if (_userID == undefined)

@@ -17,7 +17,7 @@ function __UASystem()
         }
         
         __userConsent    = false;
-        __userConsentSet = false;
+        __userConsentSet = UA_BLOCKED;
         
         __osPaused        = os_is_paused();
         __lastFocusTime   = current_time;
