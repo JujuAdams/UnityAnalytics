@@ -1,5 +1,5 @@
 {
-  "$GMNotes":"",
+  "$GMNotes":"v1",
   "%Name":"Unity Analytics Quick Start",
   "name":"Unity Analytics Quick Start",
   "parent":{
