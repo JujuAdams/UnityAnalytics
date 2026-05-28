@@ -85,11 +85,11 @@ Please consult the Unity Analytics documentation for more information:
 
 13. **Wait 5 minutes then check the event browser to confirm your custom events have been received.**
 
-    Nailing-biting stuff. Real edge-of-your-seat scenario.
+    Nailing-biting stuff.
 
 14. **Remove the `UASetUserConsent(true)` call on boot and build a user consent flow for analytics in your game.**
 
-    Wise man say "respecting consent lead to great fortune, ignoring consent lead to Civil Court".
+    Data consent is increasingly a concern for users.
 
 15. **Add a button to delete analytics data to a Settings menu etc.**
 
